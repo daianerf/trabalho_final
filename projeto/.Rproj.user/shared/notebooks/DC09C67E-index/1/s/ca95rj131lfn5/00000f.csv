@@ -1,0 +1,7 @@
+"0","# Subconjunto para irrigação com umidade moderada"
+"0","dados_moderate <- dados %>% filter(moisture == ""Moderate moisture"")"
+"0",""
+"0","# Subconjunto para irrigação com umidade alta"
+"0","dados_high <- dados %>% filter(moisture == ""High moisture"")"
+"0",""
+"0","dados_moderate"

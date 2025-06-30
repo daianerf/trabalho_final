@@ -1,0 +1,7 @@
+"0","# Histogram"
+"0","hist(residuals(modelo_aacpd),"
+"0","     main = ""Histograma dos resíduos da ANOVA (AACPD)"","
+"0","     xlab = ""Resíduos"","
+"0","     ylab = ""Frequência"","
+"0","     col = ""lightgreen"","
+"0","     border = ""black"")"

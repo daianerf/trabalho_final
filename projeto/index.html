@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TRABALHO FINAL FIP 606 - ABNER, DAIANE E MARIA IZABEL</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TRABALHO FINAL FIP 606 - ABNER, DAIANE E MARIA IZABEL</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="análise-de-dados-do-powderymildew" class="level1">
+<h1><strong>Análise de dados do PowderyMildew</strong></h1>
+<p>Este site foi desenvolvido por [<a href="https://github.com/abnerrmp">Abner Palhares</a>; <a href="https://github.com/daianerf">Daiane Fernande</a>s; Maria Izabel Leite] com o objetivo de apresentar as análises realizadas a partir do conjunto de dados PowderyMildew, disponibilizado pelo pacote Epifitter no R. A atividade integra o trabalho final da disciplina FIP 606 – Análise e Visualização de Dados em Fitopatologia, ministrada pelo professor [Emerson Del Ponte]((https://emersondelponte.netlify.app/)<strong>.</strong></p>
+<p>A análise teve como foco a severidade da doença oídio, causada por Leveillula taurica, em tomateiro cultivado sob diferentes sistemas de irrigação e níveis de umidade do solo, em um sistema de cultivo orgânico.</p>
+</section>
+<section id="obtenção-dos-dados" class="level1">
+<h1>Obtenção dos dados</h1>
+<p>Os dados utilizados neste estudo foram obtidos a partir do conjunto <em>PowderyMildew</em>, disponível no pacote <code>Epifitter</code> do R (RStudio®). Este conjunto reúne informações experimentais sobre a progressão do oídio (<em>Leveillula taurica</em>) em tomateiros cultivados sob diferentes sistemas de irrigação e níveis de umidade do solo,em um sistema de produção orgânico.</p>
+<p>O pacote <code>Epifitter</code> foi desenvolvido para facilitar a análise epidemiológica de doenças em plantas, oferecendo um conjunto de funções para visualização, descrição, ajuste e comparação de curvas de progresso de doenças.</p>
+</section>
+<section id="estrutura-do-conjunto-de-dados" class="level1">
+<h1>Estrutura do conjunto de dados</h1>
+<p>O <em>data frame</em> <em>PowderyMildew</em> contém 240 observações distribuídas em 5 variáveis principais, descritas a seguir:</p>
+<ul>
+<li><p><strong>Irrigation_type</strong>: indica o sistema de irrigação adotado, sendo:</p>
+<ul>
+<li><p>MS: microaspersão;</p></li>
+<li><p>MS above canopy: microaspersão acima do dossel;</p></li>
+<li><p>Overhead: aspersão aérea;</p></li>
+<li><p>Drip: irrigação por gotejamento;</p></li>
+<li><p>Furrow: sulco.</p></li>
+</ul></li>
+<li><p><strong>Moisture</strong>: nível de umidade do solo no momento da avaliação, classificado em:</p>
+<ul>
+<li><p>“High” (alta umidade);</p></li>
+<li><p>“Moderate” (umidade moderada).</p></li>
+</ul></li>
+<li><p><strong>Block</strong>: identifica os blocos experimentais, representando as repetições no delineamento experimental;</p></li>
+<li><p><strong>Time</strong>: vetor numérico contendo os dias correspondentes aos pontos de avaliação da doença ao longo do tempo;</p></li>
+<li><p><strong>Sev</strong>: vetor numérico com os valores de severidade da doença, registrados em escala proporcional (valores entre 0 e 1), representando a proporção da área foliar afetada.</p></li>
+</ul>
+<p>Esse banco de dados foi utilizado como base para todas as análises estatísticas e gráficas realizadas neste trabalho.</p>
+</section>
+<section id="análise-de-dados-do-powderymildew-1" class="level1">
+<h1>Análise de dados do <em>PowderyMildew</em>:</h1>
+</section>
+<section id="introdução" class="level1">
+<h1>Introdução</h1>
+<p>O banco de dados analisado neste trabalho refere-se aos resultados de um experimento conduzido com o objetivo de avaliar o desenvolvimento do oídio (<em>Leveillula taurica</em>) na cultura do tomateiro sob diferentes condições de irrigação e umidade do solo.&nbsp;</p>
+<p>Foram avaliadas cinco estratégias de irrigação combinadas com dois níveis de umidade do solo (alta e moderada), totalizando diferentes condições experimentais, embora o delineamento não tenha sido fatorial completo. O experimento incluiu o monitoramento da severidade da doença ao longo do tempo (0, 7, 14, 21, 28, 35, 42, 49, 56 e 63). A partir desses dados, buscou-se compreender de que forma o ambiente de cultivo, especialmente as práticas de irrigação podem influenciar a severidade do oídio.</p>
+</section>
+<section id="objetivo-geral" class="level1">
+<h1>Objetivo geral</h1>
+<p>Por meio da análise dos dados, objetivou-se avaliar a influência de diferentes sistemas de irrigação e níveis de umidade do solo sobre a severidade do oídio (<em>Leveillula taurica</em>) em tomateiro cultivado em sistema orgânico, considerando o progresso da doença ao longo do tempo.</p>
+<section id="objetivos-específicos" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-específicos">Objetivos específicos</h2>
+<ul>
+<li><p>Analisar a dinâmica da severidade do oídio em diferentes combinações de irrigação e umidade do solo, ao longo do tempo;</p></li>
+<li><p>Identificar quais estratégias de irrigação contribuem para a redução da severidade da doença;</p></li>
+<li><p>Verificar a interação entre tipo de irrigação e nível de umidade na progressão do oídio.</p></li>
+</ul>
+</section>
+</section>
+<section id="hipóteses-testadas" class="level1">
+<h1><strong>Hipóteses testadas</strong></h1>
+<p><strong>Hipótese nula (H₀):<br>
+</strong>Não há diferença significativa na severidade da doença entre os diferentes tipos de irrigação e níveis de umidade do solo. A média da severidade é igual em todos os tratamentos avaliados.</p>
+<p><strong>Hipótese alternativa (Hₐ):<br>
+</strong>Pelo menos uma das combinações de tipo de irrigação e nível de umidade apresenta severidade significativamente diferente das demais, indicando efeito do tratamento sobre o desenvolvimento da doença.</p>
+<section id="análise-da-variável-resposta-severidade-do-oídio" class="level2">
+<h2 class="anchored" data-anchor-id="análise-da-variável-resposta-severidade-do-oídio">Análise da variável resposta (Severidade do oídio)</h2>
+<section id="carregamento-automático-de-pacotes" class="level3">
+<h3 class="anchored" data-anchor-id="carregamento-automático-de-pacotes">Carregamento automático de pacotes</h3>
+<p>A primeira etapa para a análise dos dados é a instalação e o carregamento dos pacotes e dados no ambiente R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Instalar e carregar pacotes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificação e instalação automática de pacotes necessários</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#packages &lt;- c("readxl", "dplyr", "ggplot2", "epifitter", "agricolae", "car", "gganimate", "animate", "DHARMa", "ggthemes", "skimr", "DataExplorer", "tidyverse", "gifski", "showtext", "sysfonts","png", "easystats", "performance", "emmeans", "multcomp")</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#new_packages &lt;- packages[!(packages %in% installed.packages()[, "Package"])]</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#if(length(new_packages)) install.packages(new_packages)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregar os pacotes</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Anexando pacote: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Os seguintes objetos são mascarados por 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Os seguintes objetos são mascarados por 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epifitter)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)  <span class="co"># para Levene</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Carregando pacotes exigidos: carData</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Anexando pacote: 'car'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>O seguinte objeto é mascarado por 'package:dplyr':
+
+    recode</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(animate)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>This is DHARMa 0.4.7. For overview type '?DHARMa'. For recent changes, type news(package = 'DHARMa')</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DataExplorer)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ lubridate 1.9.4     ✔ tibble    3.2.1
+✔ purrr     1.0.4     ✔ tidyr     1.3.1
+✔ readr     2.1.5     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+✖ car::recode()   masks dplyr::recode()
+✖ purrr::some()   masks car::some()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gifski)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext) <span class="co">#Para utilizar outras fontes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Carregando pacotes exigidos: sysfonts
+Carregando pacotes exigidos: showtextdb</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sysfonts) <span class="co">#Para utilizar outras fontes</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(png)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(easystats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code># Attaching packages: easystats 0.7.4 (red = needs update)
+✖ bayestestR  0.15.2   ✔ correlation 0.8.7 
+✖ datawizard  1.0.2    ✖ effectsize  1.0.0 
+✖ insight     1.1.0    ✖ modelbased  0.10.0
+✖ performance 0.13.0   ✖ parameters  0.24.2
+✔ report      0.6.1    ✔ see         0.11.0
+
+Restart the R-Session and update packages with `easystats::easystats_update()`.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome to emmeans.
+Caution: You lose important information if you filter this package's results.
+See '? untidy'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Carregando pacotes exigidos: mvtnorm
+
+Anexando pacote: 'mvtnorm'
+
+O seguinte objeto é mascarado por 'package:modelbased':
+
+    standardize
+
+O seguinte objeto é mascarado por 'package:effectsize':
+
+    standardize
+
+O seguinte objeto é mascarado por 'package:datawizard':
+
+    standardize
+
+Carregando pacotes exigidos: survival
+Carregando pacotes exigidos: TH.data
+Carregando pacotes exigidos: MASS
+
+Anexando pacote: 'MASS'
+
+O seguinte objeto é mascarado por 'package:dplyr':
+
+    select
+
+
+Anexando pacote: 'TH.data'
+
+O seguinte objeto é mascarado por 'package:MASS':
+
+    geyser</code></pre>
+</div>
+</div>
+</section>
+<section id="importação-dos-dados" class="level3">
+<h3 class="anchored" data-anchor-id="importação-dos-dados">Importação dos dados</h3>
+<p>Como o data frame contendo os dados de severidade estão localizados em uma planilha do Excel, para realizar a importação dos dados necessitou-se utilizar a função <code>read_excel( )</code> do pacote <code>readxl</code>. O data frame foi atribuído ao objeto denominado dados.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados.xlsx"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>dados</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 240 × 5
+   irrigation_type moisture      block  time   sev
+   &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 Drip            High moisture     1     0 0.011
+ 2 Drip            High moisture     2     0 0.011
+ 3 Drip            High moisture     3     0 0.011
+ 4 Drip            High moisture     1     7 0.034
+ 5 Drip            High moisture     2     7 0.04 
+ 6 Drip            High moisture     3     7 0.036
+ 7 Drip            High moisture     1    14 0.114
+ 8 Drip            High moisture     2    14 0.109
+ 9 Drip            High moisture     3    14 0.097
+10 Drip            High moisture     1    21 0.126
+# ℹ 230 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="verificação-do-conjunto-de-dados" class="level3">
+<h3 class="anchored" data-anchor-id="verificação-do-conjunto-de-dados">Verificação do conjunto de dados</h3>
+<p>Para realizar uma inspeção inicial dos dados, foram utilizadas três funções principais no R: <code>glimpse()</code>, <code>skim()</code> e <code>names()</code>.</p>
+<p>A função glimpse mostra do pacote <code>dplyr</code>, permite uma visão geral compacta do conjunto de dados. Ela exibe:</p>
+<ol type="1">
+<li><p>O número de linhas e colunas;</p></li>
+<li><p>O tipo de dado de cada variável (por exemplo, numérico, caracterer);</p></li>
+<li><p>Os primeiros valores presentes em cada coluna;</p></li>
+</ol>
+<p>A função <code>skim()</code>, do pacote <code>skimr</code> fornece um resumo estatístico mais detalhado. Inclui média, mediana, mínimo, máximo, número de valores ausentes (NA).</p>
+<p>A função <code>names()</code> foi empregada para listar os nomes reais das colunas do dataframe, permitindo identificar com clareza as variáveis disponíveis para análise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 240
+Columns: 5
+$ irrigation_type &lt;chr&gt; "Drip", "Drip", "Drip", "Drip", "Drip", "Drip", "Drip"…
+$ moisture        &lt;chr&gt; "High moisture", "High moisture", "High moisture", "Hi…
+$ block           &lt;dbl&gt; 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, …
+$ time            &lt;dbl&gt; 0, 0, 0, 7, 7, 7, 14, 14, 14, 21, 21, 21, 28, 28, 28, …
+$ sev             &lt;dbl&gt; 0.011, 0.011, 0.011, 0.034, 0.040, 0.036, 0.114, 0.109…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">dados</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">240</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">irrigation_type</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">moisture</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">block</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.00</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: left;">▇▁▇▁▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">time</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">31.50</td>
+<td style="text-align: right;">20.15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14.00</td>
+<td style="text-align: right;">31.5</td>
+<td style="text-align: right;">49.00</td>
+<td style="text-align: right;">63.00</td>
+<td style="text-align: left;">▇▇▇▇▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sev</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.13</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: left;">▇▅▁▁▂</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "irrigation_type" "moisture"        "block"           "time"           
+[5] "sev"            </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="estabelecendo-o-visual-do-trabalho" class="level2">
+<h2 class="anchored" data-anchor-id="estabelecendo-o-visual-do-trabalho">Estabelecendo o visual do trabalho</h2>
+<section id="estabelecendo-fontes" class="level4">
+<h4 class="anchored" data-anchor-id="estabelecendo-fontes">Estabelecendo fontes</h4>
+<p>Para aprimorar a estética visual de gráficos e aplicações no R, foram adicionadas fontes do Google Fonts utilizando a função <code>font_add_google()</code> da biblioteca <strong><code>showtext</code></strong>. Cada chamada da função carrega uma fonte específica, associando-a a um nome de família que pode ser usado posteriormente em elementos gráficos, como títulos, eixos e textos.</p>
+<p>As fontes adicionadas foram: <strong>Lato, Montserrat, Inter, Manrope, Nunito, Work Sans, Lexend, Raleway, Quicksand, Roboto e Poppins.<br>
+</strong>Após a adição das fontes, a função <code>showtext_auto()</code> foi ativada. Essa função garante que as fontes personalizadas sejam corretamente renderizadas em gráficos gerados com o R, inclusive ao exportar para imagens.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "lato", family = "lato")</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "montserrat", family = "montserrat")</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "inter", family = "inter")</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "manrope", family = "manrope")</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "nunito", family = "nunito")</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "work sans", family = "work sans")</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "lexend", family = "lexend")</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "raleway", family = "raleway")</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "quicksand", family = "quicksand")</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "roboto", family = "roboto")</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">#font_add_google(name = "poppins", family = "poppins")</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">#showtext_auto()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="estabelecendo-cores" class="level4">
+<h4 class="anchored" data-anchor-id="estabelecendo-cores">Estabelecendo cores</h4>
+<p>O vetor <em>cores_irrigation</em> define um conjunto de cores associadas a diferentes métodos de irrigação, permitindo a padronização visual em gráficos.</p>
+<p>Cada tipo de irrigação é representado por uma cor específica, facilitando a visualização dos dados:</p>
+<ul>
+<li><p>Drip: representado pela cor azul ecuro (#000194);</p></li>
+<li><p>Furrow: verde vibrante (#28C800);</p></li>
+<li><p>MS: vermelho intenso (#C90A00);</p></li>
+<li><p>MS above canopy: laranja (#E68A2E);</p></li>
+<li><p>Overhead: amarelo brilhante (#FFDE00);</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>cores_irrigation <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Drip"</span> <span class="ot">=</span> <span class="st">"#000194"</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Furrow"</span> <span class="ot">=</span> <span class="st">"#28C800"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MS"</span> <span class="ot">=</span> <span class="st">"#C90A00"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MS above canopy"</span> <span class="ot">=</span> <span class="st">"#E68A2E"</span>,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Overhead"</span> <span class="ot">=</span> <span class="st">"#FFDE00"</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>cores_contorno <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Drip"</span> <span class="ot">=</span> <span class="st">"#000060"</span>,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Furrow"</span> <span class="ot">=</span> <span class="st">"#1E9E00"</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MS"</span> <span class="ot">=</span> <span class="st">"#990700"</span>,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MS above canopy"</span> <span class="ot">=</span> <span class="st">"#A6601F"</span>,</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Overhead"</span> <span class="ot">=</span> <span class="st">"#CCA800"</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="análise-exploratória-dos-dados" class="level3">
+<h3 class="anchored" data-anchor-id="análise-exploratória-dos-dados">Análise exploratória dos dados</h3>
+<p>Na etapa inicial da análise exploratória, foi utilizada a função <code>plot_missing()</code> do pacote <strong><code>DataExplorer</code></strong>, que gera um gráfico de barras indicando a porcentagem de dados faltantes (valores NA) por variável no conjunto de dados. Essa visualização permite identificar rapidamente colunas com problemas de completude, facilitando decisões sobre limpeza ou imputação de dados. O gráfico gerado foi personalizado com o título “Dados Faltantes”, e o tema visual foi ajustado com <code>theme_hc()</code> para melhor apresentação. Em seguida, a imagem foi salva com fundo branco por meio da função <code>ggsave()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(dados) <span class="sc">+</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Dados Faltantes"</span>) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_hc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A função <code>summary()</code> é uma ferramenta prática para explorar rapidamente os dados. É usada para gerar um resumo estatístico básico de um data frame. Fornece medidas como mínimo, máximo, média, mediana e quartis para variáveis numéricas, e a frequência para variáveis categóricas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> irrigation_type      moisture             block        time     
+ Length:240         Length:240         Min.   :1   Min.   : 0.0  
+ Class :character   Class :character   1st Qu.:1   1st Qu.:14.0  
+ Mode  :character   Mode  :character   Median :2   Median :31.5  
+                                       Mean   :2   Mean   :31.5  
+                                       3rd Qu.:3   3rd Qu.:49.0  
+                                       Max.   :3   Max.   :63.0  
+      sev         
+ Min.   :0.00300  
+ 1st Qu.:0.03275  
+ Median :0.09700  
+ Mean   :0.12710  
+ 3rd Qu.:0.15025  
+ Max.   :0.45700  </code></pre>
+</div>
+</div>
+</section>
+<section id="organização-dos-dados" class="level3">
+<h3 class="anchored" data-anchor-id="organização-dos-dados">Organização dos dados</h3>
+<p>Ao examinar os dados, observou-se que os tratamentos (irrigation_type: Drip, MS, Furrow, MS Above canopy, Overhead) não estão igualmente distribuídos entre as duas condições de umidade (moisture: high e moderate). Dessa forma para a análise visual dos dados resolveu-se dividi-los de acordo com seus níveis de umidade.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subconjunto para irrigação com umidade moderada</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>dados_moderate <span class="ot">&lt;-</span> dados <span class="sc">%&gt;%</span> <span class="fu">filter</span>(moisture <span class="sc">==</span> <span class="st">"Moderate moisture"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Subconjunto para irrigação com umidade alta</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>dados_high <span class="ot">&lt;-</span> dados <span class="sc">%&gt;%</span> <span class="fu">filter</span>(moisture <span class="sc">==</span> <span class="st">"High moisture"</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>dados_moderate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 120 × 5
+   irrigation_type moisture          block  time   sev
+   &lt;chr&gt;           &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 MS              Moderate moisture     1     0 0.009
+ 2 MS              Moderate moisture     2     0 0.009
+ 3 MS              Moderate moisture     3     0 0.009
+ 4 MS              Moderate moisture     1     7 0.028
+ 5 MS              Moderate moisture     2     7 0.025
+ 6 MS              Moderate moisture     3     7 0.021
+ 7 MS              Moderate moisture     1    14 0.077
+ 8 MS              Moderate moisture     2    14 0.08 
+ 9 MS              Moderate moisture     3    14 0.071
+10 MS              Moderate moisture     1    21 0.056
+# ℹ 110 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>dados_high</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 120 × 5
+   irrigation_type moisture      block  time   sev
+   &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 Drip            High moisture     1     0 0.011
+ 2 Drip            High moisture     2     0 0.011
+ 3 Drip            High moisture     3     0 0.011
+ 4 Drip            High moisture     1     7 0.034
+ 5 Drip            High moisture     2     7 0.04 
+ 6 Drip            High moisture     3     7 0.036
+ 7 Drip            High moisture     1    14 0.114
+ 8 Drip            High moisture     2    14 0.109
+ 9 Drip            High moisture     3    14 0.097
+10 Drip            High moisture     1    21 0.126
+# ℹ 110 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="análise-visual" class="level3">
+<h3 class="anchored" data-anchor-id="análise-visual">Análise visual</h3>
+<p>Usando o pacote <code>ggplot2</code>, foi explorado visualmente, por meio de diferentes gráficos, os dados de severidade da doença.</p>
+<section id="gráficos-de-pontos" class="level4">
+<h4 class="anchored" data-anchor-id="gráficos-de-pontos">Gráficos de pontos</h4>
+<p>Nesta análise, foram desenvolvidos dois gráficos de dispersão. Esses gráficos de pontos fornecem uma visão clara da distribuição da severidade da doença ao longo do tempo, permitindo comparar como os diferentes tipos de irrigação influenciam os resultados sob distintas condições de umidade.</p>
+<section id="gráfico-de-severidade-ao-longo-do-tempo-umidade-moderada" class="level5">
+<h5 class="anchored" data-anchor-id="gráfico-de-severidade-ao-longo-do-tempo-umidade-moderada">Gráfico de Severidade ao Longo do Tempo – Umidade Moderada</h5>
+<p>Para o conjunto dados_moderate, foi utilizado o tempo (time) no eixo X e a severidade da doença (sev) no eixo Y. A variável <strong>irrigation_type</strong> foi representada por diferentes cores, facilitando a comparação entre os tratamentos. A função <code>geom_jitter()</code> foi empregada para aplicar uma leve dispersão horizontal aos pontos. As cores dos tratamentos foram definidas manualmente com <code>scale_color_manual()</code> e a estética do gráfico foi finalizada com <code>theme_minimal()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráficos de pontos (dados de umidade moderada)</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_moderate, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sev, <span class="at">color =</span> irrigation_type)) <span class="sc">+</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Severidade ao longo do tempo - Umidade Moderada"</span>,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tempo"</span>,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Severidade"</span>,</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Tipo de Irrigação"</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>  <span class="co"># base limpa</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"poppins"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+not found in Windows font database
+Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+not found in Windows font database
+Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gráfico-de-severidade-ao-longo-do-tempo-umidade-alta" class="level5">
+<h5 class="anchored" data-anchor-id="gráfico-de-severidade-ao-longo-do-tempo-umidade-alta"><strong>Gráfico de Severidade ao Longo do Tempo – Umidade Alta</strong></h5>
+<p>Para a condição de <strong>umidade alta</strong>, foi construído um gráfico semelhante, utilizando o conjunto dados_high.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráficos de pontos (dados de umidade alta)</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_high, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sev, <span class="at">color =</span> irrigation_type)) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Severidade ao longo do tempo - Umidade Alta"</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tempo"</span>,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Severidade"</span>,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Tipo de Irrigação"</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>  <span class="co"># base limpa</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"poppins"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="gráfico-de-pontos-e-linhas" class="level4">
+<h4 class="anchored" data-anchor-id="gráfico-de-pontos-e-linhas">Gráfico de pontos e linhas</h4>
+<p>Antes da construção do gráfico, os dados foram agrupados pelas variáveis tratamento (combinação de tipo de irrigação + umidade),&nbsp; e time (tempo de avaliação). Em seguida, foi calculada a média da severidade (sev_mean) e o desvio padrão (sev_sd) para cada grupo. Ambas as métricas foram multiplicadas por 100 para expressar os valores em percentual:</p>
+<p>O gráfico foi gerado com base no objeto dados3, contendo os valores médios e as respectivas variações da severidade. Os principais elementos visuais são: <strong>Linhas <code>(geom_line)</code></strong>: mostram a evolução média da severidade ao longo do tempo para cada tratamento. <strong>Pontos <code>(geom_point)</code></strong>: indicam os valores médios pontuais, com o preenchimento colorido conforme o tratamento. <strong>Barras de erro <code>(geom_errorbar)</code></strong>: representam a variação (± desvio padrão) em torno da média, permitindo avaliar a dispersão dos dados.</p>
+<section id="preparação-e-agregação-dos-dados" class="level5">
+<h5 class="anchored" data-anchor-id="preparação-e-agregação-dos-dados">Preparação e agregação dos dados</h5>
+<p>Utilizou-se a função <code>mutate()</code> para criar uma nova variável chamada “tratamento”, que combina os fatores tipo de irrigação (<em>irrigation_type</em>) e nível de umidade do solo (<em>moisture</em>) em uma única coluna, separadas por ” + “.</p>
+<p>Além disso, a variável <em>irrigation_type</em> foi convertida para fator, permitindo seu uso na definição das cores dos gráficos.</p>
+<p>Em seguida, os dados foram agregados com <code>group_by()</code>. Com <code>summarise()</code>, foram calculadas: A média da severidade da doença (<code>sev_mean</code>), expressa em porcentagem. O desvio padrão da severidade (<code>sev_sd</code>), também em porcentagem.</p>
+<p>Esses valores foram reunidos em um novo conjunto de dados (<em>dados3</em>) que serviu de base para a construção de gráficos de tendência com barras de erro, permitindo a visualização da evolução da severidade da doença ao longo do tempo, com comparação entre os diferentes tratamentos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ALTERAÇÃO DE DADOS</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>dados2 <span class="ot">&lt;-</span> dados <span class="sc">%&gt;%</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">tratamento =</span> <span class="fu">paste</span>(irrigation_type, moisture, <span class="at">sep =</span> <span class="st">" + "</span>),  <span class="co"># &gt;&gt;&gt; coluna usada no eixo x</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">irrigation_type =</span> <span class="fu">as.factor</span>(irrigation_type)  <span class="co"># &gt;&gt;&gt; usada para definir as cores</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>dados3 <span class="ot">&lt;-</span> dados2 <span class="sc">%&gt;%</span> </span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tratamento, irrigation_type, moisture, time) <span class="sc">%&gt;%</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">sev_mean =</span> <span class="fu">mean</span>(sev, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sev_sd =</span> <span class="fu">sd</span>(sev, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'tratamento', 'irrigation_type',
+'moisture'. You can override using the `.groups` argument.</code></pre>
+</div>
+</div>
+</section>
+<section id="gráfico-de-pontos-e-linhas-para-severidade-moderada" class="level5">
+<h5 class="anchored" data-anchor-id="gráfico-de-pontos-e-linhas-para-severidade-moderada">Gráfico de pontos e linhas para severidade moderada</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico para Moderate moisture</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  dados3 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(moisture <span class="sc">==</span> <span class="st">"Moderate moisture"</span>),</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sev_mean, <span class="at">color =</span> irrigation_type, <span class="at">fill =</span> irrigation_type)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> tratamento), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> sev_mean <span class="sc">-</span> sev_sd, <span class="at">ymax =</span> sev_mean <span class="sc">+</span> sev_sd),</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"poppins"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">11</span>),  <span class="co"># alterado para mostrar texto ao invés de blank</span></span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Severidade da doença - Umidade Moderada"</span>,</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tempo (dias)"</span>,</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Disease severity (%)"</span>,</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Tipo de irrigação"</span>,</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Tipo de irrigação"</span></span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span></span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cores_irrigation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gráfico-de-pontos-e-linhas-para-severidade-alta" class="level5">
+<h5 class="anchored" data-anchor-id="gráfico-de-pontos-e-linhas-para-severidade-alta">Gráfico de pontos e linhas para severidade alta</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico para high moisture</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  dados3 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(moisture <span class="sc">==</span> <span class="st">"High moisture"</span>),</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sev_mean, <span class="at">color =</span> irrigation_type, <span class="at">fill =</span> irrigation_type)</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> tratamento), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span>  <span class="co"># fill é mapeado, contorno preto fixo</span></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> sev_mean <span class="sc">-</span> sev_sd, <span class="at">ymax =</span> sev_mean <span class="sc">+</span> sev_sd),</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"poppins"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">11</span>),  <span class="co"># alterado para mostrar texto ao invés de blank</span></span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Severidade da doença - Alta Umidade"</span>,</span>
+<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tempo (dias)"</span>,</span>
+<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Disease severity (%)"</span>,</span>
+<span id="cb54-26"><a href="#cb54-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Tipo de irrigação"</span>,</span>
+<span id="cb54-27"><a href="#cb54-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Tipo de irrigação"</span></span>
+<span id="cb54-28"><a href="#cb54-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb54-29"><a href="#cb54-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span></span>
+<span id="cb54-30"><a href="#cb54-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cores_irrigation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="gráfico-de-pontos-e-linhas-animado" class="level4">
+<h4 class="anchored" data-anchor-id="gráfico-de-pontos-e-linhas-animado">Gráfico de pontos e linhas animado</h4>
+<p>Foram criadas animações para ilustrar a evolução da severidade da doença ao longo do tempo sob condição específicas de solo, considerando os diferentes tipos de irrigação avaliados no experimento.</p>
+<p>Para isso, os dados foram filtrados de forma a incluir apenas as observações com umidade classificada como “moderate moisture” em um gráfico e “high moisture” no outro. Em seguida, utilizou-se o pacote <code>ggplot2</code> para construir o gráfico.</p>
+<p>A animação foi gerada com a função <code>animate()</code> do pacote gganimate, com taxa de 10 quadros por segundo, resolução de 800x500 pixels e salvo como arquivo .gif nomeado “severidade_[moisture_level]_moisture.gif”.</p>
+<p>Essa visualização dinâmica permite observar de forma clara como a severidade da doença evolui ao longo do tempo sob diferentes tipos de irrigação.</p>
+<section id="umidade-moderada" class="level5">
+<h5 class="anchored" data-anchor-id="umidade-moderada">Umidade moderada</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>gif_moderate <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  dados3 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(moisture <span class="sc">==</span> <span class="st">"Moderate moisture"</span>),</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sev_mean, <span class="at">color =</span> irrigation_type, <span class="at">fill =</span> irrigation_type)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> tratamento), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> sev_mean <span class="sc">-</span> sev_sd, <span class="at">ymax =</span> sev_mean <span class="sc">+</span> sev_sd),</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"poppins"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Umidade Moderada — Dia: {frame_along}"</span>,</span>
+<span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tempo (dias)"</span>,</span>
+<span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Severidade da doença (%)"</span>,</span>
+<span id="cb57-24"><a href="#cb57-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Tipo de irrigação"</span>,</span>
+<span id="cb57-25"><a href="#cb57-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Tipo de irrigação"</span></span>
+<span id="cb57-26"><a href="#cb57-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb57-27"><a href="#cb57-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span></span>
+<span id="cb57-28"><a href="#cb57-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span></span>
+<span id="cb57-29"><a href="#cb57-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transition_reveal</span>(<span class="at">along =</span> time)</span>
+<span id="cb57-30"><a href="#cb57-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-31"><a href="#cb57-31" aria-hidden="true" tabindex="-1"></a><span class="co">#gif_anim_moderate &lt;- animate(gif_moderate, fps = 10, width = 800, height = 500, renderer = gifski_renderer())</span></span>
+<span id="cb57-32"><a href="#cb57-32" aria-hidden="true" tabindex="-1"></a><span class="co">#anim_save("severidade_moderate_moisture.gif", gif_anim_moderate)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="umidade-alta" class="level5">
+<h5 class="anchored" data-anchor-id="umidade-alta">Umidade alta</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>gif_high <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  dados3 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(moisture <span class="sc">==</span> <span class="st">"High moisture"</span>),</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sev_mean, <span class="at">color =</span> irrigation_type, <span class="at">fill =</span> irrigation_type)</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> tratamento), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> sev_mean <span class="sc">-</span> sev_sd, <span class="at">ymax =</span> sev_mean <span class="sc">+</span> sev_sd),</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"poppins"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Alta Umidade — Dia: {frame_along}"</span>,</span>
+<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tempo (dias)"</span>,</span>
+<span id="cb58-23"><a href="#cb58-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Severidade da doença (%)"</span>,</span>
+<span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Tipo de irrigação"</span>,</span>
+<span id="cb58-25"><a href="#cb58-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Tipo de irrigação"</span></span>
+<span id="cb58-26"><a href="#cb58-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb58-27"><a href="#cb58-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span></span>
+<span id="cb58-28"><a href="#cb58-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span></span>
+<span id="cb58-29"><a href="#cb58-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transition_reveal</span>(<span class="at">along =</span> time)</span>
+<span id="cb58-30"><a href="#cb58-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-31"><a href="#cb58-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar animação</span></span>
+<span id="cb58-32"><a href="#cb58-32" aria-hidden="true" tabindex="-1"></a><span class="co">#gif_anim_high &lt;- animate(gif_high, fps = 10, width = 800, height = 500, renderer = gifski_renderer())</span></span>
+<span id="cb58-33"><a href="#cb58-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-34"><a href="#cb58-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Salvar</span></span>
+<span id="cb58-35"><a href="#cb58-35" aria-hidden="true" tabindex="-1"></a><span class="co">#anim_save("severidade_high_moisture.gif", gif_anim_high)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="observações" class="level6">
+<h6 class="anchored" data-anchor-id="observações">Observações:</h6>
+<p>Neste estudo, foram avaliados cinco tipos de irrigação sob dois níveis de umidade do solo: High (alta) e Moderate (moderada). No entanto, o experimento não segue um delineamento fatorial completo, ou seja, nem todos os tipos de irrigação possuem dados para ambos os níveis de umidade.</p>
+<p>Mais especificamente:</p>
+<ul>
+<li><p>O sistema de irrigação Drip possui dados apenas sob condição de alta umidade (High), não havendo registros para umidade moderada;</p></li>
+<li><p>Por outro lado, o sistema Furrow está representado apenas sob umidade moderada (Moderate), sem dados disponíveis para alta umidade.</p></li>
+</ul>
+<p>Devido a essas lacunas no delineamento, optamos por remover as combinações incompletas. Como consequência, os tratamentos “Drip” (alta umidade) e “Furrow” (umidade moderada) foram excluídos da análise, uma vez que não permitem a comparação entre os dois níveis de umidade. Essa decisão teve como objetivo garantir uma análise da interação entre os métodos de irrigação sob diferentes condições de umidade.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identificar quais irrigation_type têm os dois níveis de moisture</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>tipos_validos <span class="ot">&lt;-</span> dados <span class="sc">%&gt;%</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(irrigation_type) <span class="sc">%&gt;%</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_moisture =</span> <span class="fu">n_distinct</span>(moisture)) <span class="sc">%&gt;%</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_moisture <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(irrigation_type)</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar os dados para manter apenas os tipos válidos</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>dados_filtrados <span class="ot">&lt;-</span> dados <span class="sc">%&gt;%</span></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(irrigation_type <span class="sc">%in%</span> tipos_validos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+<section id="análise-estatística-e-teste-de-hipóteses" class="level2">
+<h2 class="anchored" data-anchor-id="análise-estatística-e-teste-de-hipóteses">Análise estatística e teste de hipóteses</h2>
+<ul>
+<li><p><strong>Hipótese nula (H₀):</strong> A severidade da doença é igual para todos os tratamentos estudados;</p></li>
+<li><p><strong>Hipótese alternativa (Hₐ):</strong> Pelo menos um dos tratamentos apresenta severidade média diferente da dos demais.</p></li>
+</ul>
+<section id="anova" class="level3">
+<h3 class="anchored" data-anchor-id="anova">ANOVA</h3>
+<p>Para a realização da ANOVA, foi considerado apenas o último tempo de avaliação da severidade da doença (aos 63 dias de avaliação), uma vez que o objetivo principal era identificar quais tratamentos apresentaram menor severidade e, portanto, foram mais eficazes no controle da doença. A análise foi conduzida para avaliar os efeitos do tipo de irrigação (<em>irrigation_type</em>), do nível de umidade do solo (<em>moisture</em>) e de sua interação (<em>irrigation_type × moisture</em>). O bloco experimental (<em>block</em>) foi incluído como fator aleatório, convertido com <code>as.factor(block)</code>.</p>
+<p>A análise do modelo de ANOVA foi realizada utilizando a função <code>aov</code>, a qual faz parte do pacote base do R. Os resultados da ANOVA foram obtidos com s<code>ummary(aov_dados63)</code>, permitindo a identificação de efeitos significativos entre os tratamentos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>dados_63 <span class="ot">&lt;-</span> dados_filtrados <span class="sc">|&gt;</span> </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(time <span class="sc">==</span> <span class="dv">63</span>)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>aov_dados63 <span class="ot">=</span> <span class="fu">aov</span>(sev <span class="sc">~</span> irrigation_type<span class="sc">*</span>moisture <span class="sc">+</span> <span class="fu">as.factor</span>(block), <span class="at">data =</span> dados_63)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_dados63)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         Df  Sum Sq Mean Sq F value   Pr(&gt;F)    
+irrigation_type           2 0.22391 0.11195 462.898 1.39e-10 ***
+moisture                  1 0.00323 0.00323  13.342  0.00444 ** 
+as.factor(block)          2 0.00011 0.00005   0.221  0.80572    
+irrigation_type:moisture  2 0.00177 0.00089   3.661  0.06413 .  
+Residuals                10 0.00242 0.00024                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<section id="boxplot-de-severidade-final" class="level4">
+<h4 class="anchored" data-anchor-id="boxplot-de-severidade-final">Boxplot de severidade final</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_63, <span class="fu">aes</span>(<span class="at">x =</span> irrigation_type, <span class="at">y =</span> sev, <span class="at">fill =</span> irrigation_type, <span class="at">color =</span> irrigation_type)) <span class="sc">+</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Severidade por Tipo de Irrigação e Umidade"</span>,</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,  <span class="co"># &gt;&gt;&gt; remove o título do eixo X</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Severidade"</span>,</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Tipo de Irrigação"</span>,  <span class="co"># &gt;&gt;&gt; legenda mais limpa</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Tipo de Irrigação"</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span>  <span class="co"># &gt;&gt;&gt; novas cores por tipo</span></span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cores_contorno) <span class="sc">+</span>      <span class="co"># &gt;&gt;&gt; novos contornos por tipo</span></span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>moisture) <span class="sc">+</span></span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"poppins"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
+<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),  <span class="co"># &gt;&gt;&gt; inclinação para visualização melhor</span></span>
+<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">10</span>),  <span class="co"># &gt;&gt;&gt; aumento da fonte para melhor leitura</span></span>
+<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb62-25"><a href="#cb62-25" aria-hidden="true" tabindex="-1"></a><span class="fu">guides</span>(</span>
+<span id="cb62-26"><a href="#cb62-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">5</span>))</span>
+<span id="cb62-27"><a href="#cb62-27" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Efeito</th>
+<th>df</th>
+<th>F value</th>
+<th>Pr(&gt;F)</th>
+<th>Significância</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>irrigation_type</code></td>
+<td>2</td>
+<td>462.898</td>
+<td>1.39e-10</td>
+<td>*** significativo ao nível de 0%</td>
+</tr>
+<tr class="even">
+<td><code>moisture</code></td>
+<td>1</td>
+<td>13.342</td>
+<td>0.00444</td>
+<td>** significativo ao nível de 0,1%</td>
+</tr>
+<tr class="odd">
+<td><code>block</code> (como fator)</td>
+<td>2</td>
+<td>0.221</td>
+<td>0.80572</td>
+<td>NS</td>
+</tr>
+<tr class="even">
+<td><code>irrigation_type:moisture</code></td>
+<td>2</td>
+<td>3.661</td>
+<td>0.06413</td>
+<td>. significativo ao nível de 5%</td>
+</tr>
+<tr class="odd">
+<td><code>residual</code></td>
+<td>10</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>A hipótese nula (H₀) foi rejeitada, uma vez que os valores de <em>p</em> para os fatores principais foram menores que ao nível de significância de 0,05. Assim, aceita-se a hipótese alternativa (Hₐ), indicando que pelo menos um dos tratamentos difere significativamente dos demais.</p>
+<ul>
+<li><p>Efeito principal de tipo de irrigação (<em>irrigation_type</em>):<br>
+Muito significativo (p &lt; 0,001), indicando que os diferentes métodos de irrigação afetaram de forma clara e consistente a severidade da doença;</p></li>
+<li><p>Efeito principal de umidade (<em>moisture</em>):<br>
+Significativo (p = 0,00444), sugerindo que o nível de umidade do solo (alta vs.&nbsp;moderada) também teve impacto importante na severidade da doença, independentemente do tipo de irrigação;</p></li>
+<li><p>Efeito do bloco (<em>block</em>):<br>
+Não significativo (p = 0,80572), indicando que a variação entre blocos foi mínima, o que pode ser interpretado como consistência entre repetições;</p></li>
+<li><p>Interação entre irrigação e umidade (<em>irrigation_type:moisture</em>): Marginalmente significativa (p = 0,06413), a interação entre os fatores sugere que o efeito da umidade pode depender do tipo de irrigação. Embora não tenha atingido significância estatística ao nível de 5%, o valor de p indica uma tendência de interação que poderia se tornar significativa com um maior número de repetições ou uma amostra mais robusta, reduzindo a variabilidade e aumentando o poder do teste.</p></li>
+</ul>
+</section>
+<section id="checagem-das-premissas" class="level4">
+<h4 class="anchored" data-anchor-id="checagem-das-premissas">Checagem das premissas</h4>
+<section id="histograma" class="level5">
+<h5 class="anchored" data-anchor-id="histograma">Histograma</h5>
+<p>Para verificar a normalidade dos resíduos do modelo de ANOVA, foi construído um histograma dos resíduos utilizando a função <code>hist()</code>. O comando <code>residuals(aov_dados63)</code> extrai os resíduos do modelo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(aov_dados63),</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histograma dos resíduos da ANOVA (SEV)"</span>,</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Resíduos"</span>,</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Frequência"</span>,</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightgreen"</span>,</span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="interpretação" class="level6">
+<h6 class="anchored" data-anchor-id="interpretação">Interpretação</h6>
+<p>Forma aproximadamente simétrica: a distribuição dos resíduos é centrada em torno de zero, o que é um indicativo positivo de normalidade. Os resíduos estão distribuídos em um intervalo relativamente estreito (aproximadamente entre -0,025 e 0,02), sugerindo ausência de valores extremos (<em>outliers</em>). A maior frequência de resíduos ocorre próxima de zero, o que é característico de distribuições normais.</p>
+</section>
+</section>
+<section id="dharma" class="level5">
+<h5 class="anchored" data-anchor-id="dharma">DHARMa</h5>
+<p>Para avaliar as suposições do modelo linear ajustado, foi utilizada a simulação de resíduos por meio do pacote <code>DHARMa</code>.</p>
+<p>Primeiramente, foi ajustado um modelo linear aos dados. Em seguida, os resíduos foram simulados com a função <code>simulateResiduals()</code> do pacote <code>DHARMa</code>, que gera resíduos padronizados baseados em simulações sob o modelo ajustado. Essa abordagem é especialmente útil para detectar desvios de normalidade, heterocedasticidade e efeitos de estrutura nos dados.</p>
+<section id="painel-esquerdo---qq-plot-dos-resíduos-simulados" class="level6">
+<h6 class="anchored" data-anchor-id="painel-esquerdo---qq-plot-dos-resíduos-simulados">Painel esquerdo - QQ-plot dos resíduos simulados:</h6>
+<p>Esse gráfico demonstra a normalidade dos resíduos de forma robusta.</p>
+<p>Os triângulos seguem bem a linha vermelha de 45°, o que é um bom sinal.</p>
+<p><strong>KS test:</strong> p = 0.69937, maior que p &gt; 0.05.&nbsp; Não há evidência de que os resíduos violam a normalidade.</p>
+<p><strong>Dispersion test:</strong> p = 0.24. Não há problema de superdispersão.</p>
+<p><strong>Outlier test:</strong> p = 1. Nenhum outlier significativo detectado.</p>
+<p>Os resíduos estão aproximadamente normais e sem outliers problemáticos. Pressuposto de normalidade atendido.</p>
+</section>
+<section id="painel-direito---resíduos-simulados-vs-valores-preditos" class="level6">
+<h6 class="anchored" data-anchor-id="painel-direito---resíduos-simulados-vs-valores-preditos"><strong>Painel Direito - Resíduos simulados vs valores preditos</strong></h6>
+<p>O que o gráfico indica:</p>
+<p>Red curves = significância estatística: a presença de curvas vermelhas indica que houve desvio significativo dos quantis esperados.</p>
+<p>O texto vermelho confirma: Isso não é um problema grave, mas sugere que:</p>
+<p>Pode haver algum padrão residual leve, talvez relacionado a variâncias diferentes entre grupos (heterocedasticidade leve).</p>
+<p>Isso não invalida o modelo, mas é um sinal para cautela na interpretação dos efeitos.</p>
+<p>Por isso, foi realizado o leveneTest() para confirmar se há heterocedasticidade.</p>
+<p>Depois foram&nbsp; utilizados testes mais específicos para verificar a normalidade:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>modelo_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(sev <span class="sc">~</span> irrigation_type <span class="sc">*</span> moisture <span class="sc">+</span> <span class="fu">as.factor</span>(block), <span class="at">data =</span> dados_63)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Simular resíduos com DHARMa</span></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>residuos_sim <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> modelo_lm)</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Plotar diagnósticos</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(residuos_sim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="normalidade" class="level6">
+<h6 class="anchored" data-anchor-id="normalidade">Normalidade</h6>
+<p>Primeiramente, utilizou-se a função <code>check_normality()</code> para obter uma verificação geral da normalidade dos resíduos.</p>
+<p>Em seguida, foi construído um gráfico QQ-plot (Quantile-Quantile). Esse gráfico compara a distribuição dos resíduos observados com a distribuição normal teórica. Uma boa aderência dos pontos à linha vermelha indica que os resíduos seguem aproximadamente uma distribuição normal, o que foi observado no gráfico, sem desvios acentuados.</p>
+<p>Por fim, foi aplicado o teste de <em>Shapiro-Wilk</em> <code>shapiro.test()</code>. Esse teste estatístico avalia formalmente a hipótese nula de que os resíduos seguem uma distribuição normal. Um valor de <em>p</em> ≥ que 0,05 indica que não há evidências para rejeitar a normalidade dos resíduos, confirmando que essa suposição foi atendida no modelo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_normality</span>(aov_dados63)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: residuals appear as normally distributed (p = 0.369).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ-plot</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(aov_dados63), <span class="at">main =</span> <span class="st">"QQ-Plot dos resíduos"</span>) </span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(aov_dados63), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste de Shapiro-Wilk</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(aov_dados63))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  residuals(aov_dados63)
+W = 0.9462, p-value = 0.3686</code></pre>
+</div>
+</div>
+</section>
+<section id="homocedasticidade" class="level6">
+<h6 class="anchored" data-anchor-id="homocedasticidade">Homocedasticidade</h6>
+<p>Teste geral com check_heteroscedasticity().</p>
+</section>
+</section>
+</section>
+<section id="testes-estatísticos" class="level4">
+<h4 class="anchored" data-anchor-id="testes-estatísticos"><strong>Testes estatísticos:</strong></h4>
+<p><strong>Bartlett’s test (</strong><code>bartlett.test</code><strong>):</strong> É indicado apenas quando os resíduos seguem uma distribuição normal.&nbsp;</p>
+<p>Um valor de <em>p</em> &gt; 0,05 indica que não há evidência significativa de heterogeneidade de variâncias, ou seja, a suposição de homocedasticidade é atendida.<strong><br>
+</strong></p>
+<p><strong>Levene’s test (</strong><code>leveneTest</code><strong>):</strong> Este teste é mais robusto quando a normalidade não pode ser totalmente garantida.<br>
+Um <em>p</em> &gt; 0,05 sugere homogeneidade de variâncias entre os grupos. Se o valor for menor que 0,05, isso indicaria heterocedasticidade, violando uma das suposições da ANOVA.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroscedasticity</span>(aov_dados63)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: Error variance appears to be homoscedastic (p = 0.829).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bartlett (apenas se resíduos forem normais):</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(sev <span class="sc">~</span> <span class="fu">interaction</span>(irrigation_type, moisture), <span class="at">data =</span> dados_63)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Bartlett test of homogeneity of variances
+
+data:  sev by interaction(irrigation_type, moisture)
+Bartlett's K-squared = 5.8917, df = 5, p-value = 0.3169</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Para dados não necessariamente normais</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(sev <span class="sc">~</span> <span class="fu">interaction</span>(irrigation_type, moisture), <span class="at">data =</span> dados_63)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  5  0.5556  0.732
+      12               </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="teste-de-comparação-de-médias" class="level3">
+<h3 class="anchored" data-anchor-id="teste-de-comparação-de-médias">Teste de comparação de médias</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Médias ajustadas</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>medias <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(modelo_lm, <span class="sc">~</span> irrigation_type <span class="sc">*</span> moisture)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparações de médias com agrupamento por letras</span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>letras <span class="ot">&lt;-</span> <span class="fu">cld</span>(medias, <span class="at">adjust =</span> <span class="st">"sidak"</span>, <span class="at">Letters =</span> letters)</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar resultado</span></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(letras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> irrigation_type moisture          emmean      SE df lower.CL upper.CL .group
+ Overhead        High moisture      0.124 0.00898 10   0.0944    0.153  a    
+ Overhead        Moderate moisture  0.129 0.00898 10   0.1000    0.159  a    
+ MS above canopy High moisture      0.147 0.00898 10   0.1174    0.176  a    
+ MS above canopy Moderate moisture  0.168 0.00898 10   0.1387    0.197  a    
+ MS              High moisture      0.350 0.00898 10   0.3210    0.380   b   
+ MS              Moderate moisture  0.404 0.00898 10   0.3744    0.433    c  
+
+Results are averaged over the levels of: block 
+Confidence level used: 0.95 
+Conf-level adjustment: sidak method for 6 estimates 
+P value adjustment: sidak method for 15 tests 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. </code></pre>
+</div>
+</div>
+<p>A tabela abaixo apresenta as médias ajustadas da severidade da doença para cada combinação de tipo de irrigação e umidade, incluindo erro padrão, intervalos de confiança, e o agrupamento por letras. O agrupamento foi feito com base na comparação múltipla utilizando o método de Sidak ajustado para Tukey (α = 0,05). Letras iguais indicam ausência de diferença estatística significativa.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Tipo de Irrigação</td>
+<td>Umidade</td>
+<td>Média Ajustada</td>
+<td>SE</td>
+<td>GL</td>
+<td>IC Inferior</td>
+<td>IC Superior</td>
+<td>Grupo</td>
+</tr>
+<tr class="even">
+<td>Overhead</td>
+<td>Alta</td>
+<td>0.124</td>
+<td>0.00898</td>
+<td>10</td>
+<td>0.0944</td>
+<td>0.153</td>
+<td>a</td>
+</tr>
+<tr class="odd">
+<td>Overhead</td>
+<td>Moderada</td>
+<td>0.129</td>
+<td>0.00898</td>
+<td>10</td>
+<td>0.1</td>
+<td>0.159</td>
+<td>a</td>
+</tr>
+<tr class="even">
+<td>MS above canopy</td>
+<td>Alta</td>
+<td>0.147</td>
+<td>0.00898</td>
+<td>10</td>
+<td>0.1174</td>
+<td>0.176</td>
+<td>a</td>
+</tr>
+<tr class="odd">
+<td>MS above canopy</td>
+<td>Moderada</td>
+<td>0.168</td>
+<td>0.00898</td>
+<td>10</td>
+<td>0.1387</td>
+<td>0.197</td>
+<td>a</td>
+</tr>
+<tr class="even">
+<td>MS</td>
+<td>Alta</td>
+<td>0.35</td>
+<td>0.00898</td>
+<td>10</td>
+<td>0.321</td>
+<td>0.38</td>
+<td>b</td>
+</tr>
+<tr class="odd">
+<td>MS</td>
+<td>Moderada</td>
+<td>0.404</td>
+<td>0.00898</td>
+<td>10</td>
+<td>0.3744</td>
+<td>0.433</td>
+<td>c</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(modelo_lm, pairwise <span class="sc">~</span> moisture, <span class="at">adjust =</span> <span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>NOTE: Results may be misleading due to involvement in interactions</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$emmeans
+ moisture          emmean      SE df lower.CL upper.CL
+ High moisture      0.207 0.00518 10    0.195    0.218
+ Moderate moisture  0.234 0.00518 10    0.222    0.245
+
+Results are averaged over the levels of: irrigation_type, block 
+Confidence level used: 0.95 
+
+$contrasts
+ contrast                          estimate      SE df t.ratio p.value
+ High moisture - Moderate moisture  -0.0268 0.00733 10  -3.653  0.0044
+
+Results are averaged over the levels of: irrigation_type, block </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cld</span>(<span class="fu">emmeans</span>(modelo_lm, <span class="sc">~</span> moisture), <span class="at">adjust =</span> <span class="st">"tukey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>NOTE: Results may be misleading due to involvement in interactions</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Note: adjust = "tukey" was changed to "sidak"
+because "tukey" is only appropriate for one set of pairwise comparisons</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> moisture          emmean      SE df lower.CL upper.CL .group
+ High moisture      0.207 0.00518 10    0.193    0.221  1    
+ Moderate moisture  0.234 0.00518 10    0.220    0.247   2   
+
+Results are averaged over the levels of: irrigation_type, block 
+Confidence level used: 0.95 
+Conf-level adjustment: sidak method for 2 estimates 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. </code></pre>
+</div>
+</div>
+<p>A tabela abaixo apresenta as médias ajustadas da severidade da doença para cada nível de umidade, com erro padrão, intervalos de confiança e agrupamento por letras. O agrupamento foi realizado utilizando o método de Sidak (α = 0,05), ajustado a partir de comparações múltiplas.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 21%">
+<col style="width: 12%">
+<col style="width: 6%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 9%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Umidade</td>
+<td>Média Ajustada</td>
+<td>SE</td>
+<td>GL</td>
+<td>IC Inferior</td>
+<td>IC Superior</td>
+<td>Grupo</td>
+</tr>
+<tr class="even">
+<td>Alta</td>
+<td>0.207</td>
+<td>0.00518</td>
+<td>10</td>
+<td>0.193</td>
+<td>0.221</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Moderada</td>
+<td>0.234</td>
+<td>0.00518</td>
+<td>10</td>
+<td>0.22</td>
+<td>0.247</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="audpc" class="level2">
+<h2 class="anchored" data-anchor-id="audpc">AUDPC</h2>
+<p>Para quantificar o avanço da doença ao longo do tempo, foi realizada a análise da Área Abaixo da Curva de Progresso da Doença (<em>AACPD</em> ou <em>AUDPC</em>), utilizando todos os tempos de avaliação disponíveis no experimento. Essa métrica resume, em um único valor, a intensidade acumulada da doença durante o período observado, sendo amplamente utilizada em estudos epidemiológicos por refletir tanto a severidade quanto a duração da infecção.</p>
+<p>A análise foi conduzida com o pacote <code>epifitter</code> (fornece funções para análise do cálculo da AACPD), especificamente por meio da função <code>audpc()</code>. A função <code>audpc()</code> calcula a Área Abaixo da Curva de Progresso da Doença com base: na severidade da doença <em>(sev)</em> multiplicada por 100 (para expressar em %), e no tempo de avaliação <em>(time)</em>. O resultado é armazenado em <em>aacpd_resultado</em>, que contém uma linha para cada combinação de tratamento e bloco, com o valor correspondente da AACPD.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epifitter)</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calcular a AACPD para cada combinação de tratamento e bloco</span></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>aacpd_resultado <span class="ot">&lt;-</span> dados2 <span class="sc">%&gt;%</span></span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tratamento, block) <span class="sc">%&gt;%</span></span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">AACPD =</span> <span class="fu">audpc</span>(sev<span class="sc">*</span><span class="dv">100</span>, time), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Visualizar os resultados</span></span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(aacpd_resultado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 24 × 3
+   tratamento                 block AACPD
+   &lt;chr&gt;                      &lt;dbl&gt; &lt;dbl&gt;
+ 1 Drip + High moisture           1 1300.
+ 2 Drip + High moisture           2 1388.
+ 3 Drip + High moisture           3 1329.
+ 4 Furrow + Moderate moisture     1 1353.
+ 5 Furrow + Moderate moisture     2 1400.
+ 6 Furrow + Moderate moisture     3 1387.
+ 7 MS + High moisture             1  806.
+ 8 MS + High moisture             2  924.
+ 9 MS + High moisture             3  826.
+10 MS + Moderate moisture         1 1052.
+# ℹ 14 more rows</code></pre>
+</div>
+</div>
+<section id="anova-1" class="level3">
+<h3 class="anchored" data-anchor-id="anova-1">ANOVA</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>modelo_aacpd <span class="ot">&lt;-</span> <span class="fu">aov</span>(AACPD <span class="sc">~</span> tratamento, <span class="at">data =</span> aacpd_resultado)</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_aacpd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df  Sum Sq Mean Sq F value Pr(&gt;F)    
+tratamento   7 4053698  579100   400.3 &lt;2e-16 ***
+Residuals   16   23148    1447                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<section id="checagem-das-premissas-1" class="level4">
+<h4 class="anchored" data-anchor-id="checagem-das-premissas-1">Checagem das premissas</h4>
+<section id="histograma-1" class="level5">
+<h5 class="anchored" data-anchor-id="histograma-1">Histograma</h5>
+<p>O gráfico mostrou uma distribuição aproximadamente simétrica e centrada em torno de zero, o que indica que os resíduos seguem uma tendência próxima à distribuição normal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(modelo_aacpd),</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histograma dos resíduos da ANOVA (AACPD)"</span>,</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Resíduos"</span>,</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Frequência"</span>,</span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightgreen"</span>,</span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dharma-aacpd" class="level5">
+<h5 class="anchored" data-anchor-id="dharma-aacpd">DHARMa (AACPD)</h5>
+<p>Os resultados indicaram que o modelo se comporta adequadamente, sem violações evidentes dos pressupostos estatísticos. Entretanto o resultado apresentado pelo teste de resíduos simulados <em>vs</em> valores preditos exige com o que seja necessário fazer testes adicionais.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>modelo_lmaacpd <span class="ot">&lt;-</span> <span class="fu">lm</span>(AACPD <span class="sc">~</span> tratamento <span class="sc">+</span> <span class="fu">as.factor</span>(block), <span class="at">data =</span> aacpd_resultado)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Simular resíduos com DHARMa</span></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>residuos_simaacpd <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> modelo_lmaacpd)</span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Plotar diagnósticos</span></span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(residuos_simaacpd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,
+: Fitting terminated with step failure - check results carefully</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="normalidade-aacpd" class="level6">
+<h6 class="anchored" data-anchor-id="normalidade-aacpd">Normalidade (AACPD)</h6>
+<p>A normalidade dos resíduos do modelo de ANOVA para a variável <em>AACPD</em> foi avaliada por meio do gráfico QQ-Plot e do teste de Shapiro-Wilk. O gráfico indicou boa aderência dos resíduos à linha de normalidade. Já o teste de Shapiro-Wilk apresentou valor de <em>p</em> = 0,3125, indicando que não há evidência significativa de violação da normalidade (<em>p</em> &gt; 0,05). Portanto, o modelo atende ao pressuposto de normalidade dos resíduos, sendo apropriado para a análise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_normality</span>(modelo_aacpd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: residuals appear as normally distributed (p = 0.972).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ-plot</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(modelo_aacpd), <span class="at">main =</span> <span class="st">"QQ-Plot dos resíduos"</span>)</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(modelo_aacpd), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste de Shapiro-Wilk</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(modelo_aacpd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  residuals(modelo_aacpd)
+W = 0.9855, p-value = 0.9722</code></pre>
+</div>
+</div>
+</section>
+<section id="homocedasticidade-aacpd" class="level6">
+<h6 class="anchored" data-anchor-id="homocedasticidade-aacpd">Homocedasticidade (AACPD)</h6>
+<p>Esses dados confirmam a homocedasticidade dos dados, confirmando portanto a última premissa da ANOVA.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroscedasticity</span>(modelo_aacpd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: Error variance appears to be homoscedastic (p = 0.087).</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bartlett (apenas se resíduos forem normais):</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(AACPD <span class="sc">~</span> tratamento, <span class="at">data =</span> aacpd_resultado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Bartlett test of homogeneity of variances
+
+data:  AACPD by tratamento
+Bartlett's K-squared = 7.7261, df = 7, p-value = 0.3574</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Para dados não necessariamente normais</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(AACPD <span class="sc">~</span> tratamento, <span class="at">data =</span> aacpd_resultado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in leveneTest.default(y = y, group = group, ...): group coerced to
+factor.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  7  0.5639 0.7744
+      16               </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="boxplot" class="level3">
+<h3 class="anchored" data-anchor-id="boxplot">Boxplot</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>aacpd_resultado2 <span class="ot">&lt;-</span> aacpd_resultado <span class="sc">%&gt;%</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">irrigation_type =</span> <span class="fu">case_when</span>(</span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"Drip"</span>) <span class="sc">~</span> <span class="st">"Drip"</span>,</span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"Furrow"</span>) <span class="sc">~</span> <span class="st">"Furrow"</span>,</span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"MS above canopy"</span>) <span class="sc">~</span> <span class="st">"MS above canopy"</span>,</span>
+<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"MS"</span>) <span class="sc">~</span> <span class="st">"MS"</span>,</span>
+<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"Overhead"</span>) <span class="sc">~</span> <span class="st">"Overhead"</span></span>
+<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb106-11"><a href="#cb106-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-12"><a href="#cb106-12" aria-hidden="true" tabindex="-1"></a>aacpd_resultado2 <span class="ot">&lt;-</span> aacpd_resultado2 <span class="sc">%&gt;%</span></span>
+<span id="cb106-13"><a href="#cb106-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb106-14"><a href="#cb106-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">irrigation_type =</span> <span class="fu">case_when</span>(</span>
+<span id="cb106-15"><a href="#cb106-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"Drip"</span>) <span class="sc">~</span> <span class="st">"Drip"</span>,</span>
+<span id="cb106-16"><a href="#cb106-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"Furrow"</span>) <span class="sc">~</span> <span class="st">"Furrow"</span>,</span>
+<span id="cb106-17"><a href="#cb106-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"MS above canopy"</span>) <span class="sc">~</span> <span class="st">"MS above canopy"</span>,</span>
+<span id="cb106-18"><a href="#cb106-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"MS"</span>) <span class="sc">~</span> <span class="st">"MS"</span>,</span>
+<span id="cb106-19"><a href="#cb106-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"Overhead"</span>) <span class="sc">~</span> <span class="st">"Overhead"</span></span>
+<span id="cb106-20"><a href="#cb106-20" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb106-21"><a href="#cb106-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">moisture =</span> <span class="fu">case_when</span>(</span>
+<span id="cb106-22"><a href="#cb106-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"High moisture"</span>) <span class="sc">~</span> <span class="st">"High moisture"</span>,</span>
+<span id="cb106-23"><a href="#cb106-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"Moderate moisture"</span>) <span class="sc">~</span> <span class="st">"Moderate moisture"</span>,</span>
+<span id="cb106-24"><a href="#cb106-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(tratamento, <span class="st">"Low moisture"</span>) <span class="sc">~</span> <span class="st">"Low moisture"</span></span>
+<span id="cb106-25"><a href="#cb106-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb106-26"><a href="#cb106-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb106-27"><a href="#cb106-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-28"><a href="#cb106-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-29"><a href="#cb106-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aacpd_resultado2, <span class="fu">aes</span>(<span class="at">x =</span> tratamento, <span class="at">y =</span> AACPD, <span class="at">fill =</span> irrigation_type, <span class="at">color =</span> irrigation_type)) <span class="sc">+</span></span>
+<span id="cb106-30"><a href="#cb106-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb106-31"><a href="#cb106-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb106-32"><a href="#cb106-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Área Abaixo da Curva do Progresso da Doença (AACPD)"</span>,</span>
+<span id="cb106-33"><a href="#cb106-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb106-34"><a href="#cb106-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"AACPD"</span>,</span>
+<span id="cb106-35"><a href="#cb106-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Tipo de Irrigação"</span>,</span>
+<span id="cb106-36"><a href="#cb106-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Tipo de Irrigação"</span></span>
+<span id="cb106-37"><a href="#cb106-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb106-38"><a href="#cb106-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb106-39"><a href="#cb106-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cores_irrigation) <span class="sc">+</span></span>
+<span id="cb106-40"><a href="#cb106-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cores_contorno) <span class="sc">+</span></span>
+<span id="cb106-41"><a href="#cb106-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>moisture) <span class="sc">+</span></span>
+<span id="cb106-42"><a href="#cb106-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb106-43"><a href="#cb106-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb106-44"><a href="#cb106-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"poppins"</span>, <span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb106-45"><a href="#cb106-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb106-46"><a href="#cb106-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"plain"</span>),</span>
+<span id="cb106-47"><a href="#cb106-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb106-48"><a href="#cb106-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb106-49"><a href="#cb106-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb106-50"><a href="#cb106-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb106-51"><a href="#cb106-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb106-52"><a href="#cb106-52" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb106-53"><a href="#cb106-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(</span>
+<span id="cb106-54"><a href="#cb106-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">5</span>))</span>
+<span id="cb106-55"><a href="#cb106-55" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database
+Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database
+Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+font family not found in Windows font database</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="teste-de-comparação-de-médias-aacpd" class="level3">
+<h3 class="anchored" data-anchor-id="teste-de-comparação-de-médias-aacpd">Teste de comparação de médias (AACPD)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA já ajustada no objeto modelo_aacpd</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste de comparação de médias (Tukey)</span></span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Converter bloco para fator, se necessário</span></span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a>aacpd_resultado<span class="sc">$</span>block <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(aacpd_resultado<span class="sc">$</span>block)</span>
+<span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-8"><a href="#cb109-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Rodar ANOVA novamente com bloco (modelo mais completo)</span></span>
+<span id="cb109-9"><a href="#cb109-9" aria-hidden="true" tabindex="-1"></a>modelo_com_bloco <span class="ot">&lt;-</span> <span class="fu">aov</span>(AACPD <span class="sc">~</span> tratamento <span class="sc">+</span> block, <span class="at">data =</span> aacpd_resultado)</span>
+<span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste de Tukey com agricolae</span></span>
+<span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a>tukey_resultado <span class="ot">&lt;-</span> <span class="fu">HSD.test</span>(modelo_com_bloco, <span class="at">trt =</span> <span class="st">"tratamento"</span>, <span class="at">group =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb109-13"><a href="#cb109-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-14"><a href="#cb109-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar grupos</span></span>
+<span id="cb109-15"><a href="#cb109-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tukey_resultado<span class="sc">$</span>groups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                        AACPD groups
+Furrow + Moderate moisture          1379.9333      a
+Drip + High moisture                1338.9833      a
+MS + Moderate moisture              1118.3667      b
+MS + High moisture                   852.0167      c
+MS above canopy + Moderate moisture  485.5667      d
+MS above canopy + High moisture      399.2333     de
+Overhead + Moderate moisture         381.2667      e
+Overhead + High moisture             368.4333      e</code></pre>
+</div>
+</div>
+<p>A tabela abaixo apresenta as médias de AACPD e o agrupamento por letras. O agrupamento foi feito com base na comparação múltipla utilizando o método de TukeyHSD ajustado para Tukey (α = 0,05). Letras iguais indicam ausência de diferença estatística significativa.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Tratamento</th>
+<th>Média AACPD</th>
+<th>Grupo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Furrow + Moderate moisture</strong></td>
+<td>1379.93</td>
+<td>a</td>
+</tr>
+<tr class="even">
+<td><strong>Drip + High moisture</strong></td>
+<td>1338.98</td>
+<td>a</td>
+</tr>
+<tr class="odd">
+<td><strong>MS + Moderate moisture</strong></td>
+<td>1118.37</td>
+<td>b</td>
+</tr>
+<tr class="even">
+<td><strong>MS + High moisture</strong></td>
+<td>852.02</td>
+<td>c</td>
+</tr>
+<tr class="odd">
+<td><strong>MS above canopy + Moderate moisture</strong></td>
+<td>485.57</td>
+<td>d</td>
+</tr>
+<tr class="even">
+<td><strong>MS above canopy + High moisture</strong></td>
+<td>399.23</td>
+<td>de</td>
+</tr>
+<tr class="odd">
+<td><strong>Overhead + Moderate moisture</strong></td>
+<td>381.27</td>
+<td>e</td>
+</tr>
+<tr class="even">
+<td><strong>Overhead + High moisture</strong></td>
+<td>368.43</td>
+<td>e</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

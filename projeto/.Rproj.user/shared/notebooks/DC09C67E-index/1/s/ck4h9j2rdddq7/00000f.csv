@@ -1,0 +1,7 @@
+"0","# Histogram"
+"0","hist(residuals(aov_dados63),"
+"0","     main = ""Histograma dos resíduos da ANOVA (SEV)"","
+"0","     xlab = ""Resíduos"","
+"0","     ylab = ""Frequência"","
+"0","     col = ""lightgreen"","
+"0","     border = ""black"")"

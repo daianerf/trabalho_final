@@ -1,0 +1,7 @@
+"0","modelo_lm <- lm(sev ~ irrigation_type * moisture + as.factor(block), data = dados_63)"
+"0",""
+"0","# 4. Simular resíduos com DHARMa"
+"0","residuos_sim <- simulateResiduals(fittedModel = modelo_lm)"
+"0",""
+"0","# 5. Plotar diagnósticos"
+"0","plot(residuos_sim)"

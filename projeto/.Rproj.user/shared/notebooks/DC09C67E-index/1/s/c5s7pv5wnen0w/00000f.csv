@@ -1,0 +1,7 @@
+"0","modelo_lmaacpd <- lm(AACPD ~ tratamento + as.factor(block), data = aacpd_resultado)"
+"0",""
+"0","# 4. Simular resíduos com DHARMa"
+"0","residuos_simaacpd <- simulateResiduals(fittedModel = modelo_lmaacpd)"
+"0",""
+"0","# 5. Plotar diagnósticos"
+"0","plot(residuos_simaacpd)"
