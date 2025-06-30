@@ -2,13 +2,15 @@
 title: "TRABALHO FINAL FIP 606 - ABNER, DAIANE E MARIA IZABEL"
 format: html
 editor: visual
+warning: false
+message: false
 ---
 
 # **Análise de dados do PowderyMildew**
 
-Este site foi desenvolvido por \[[Abner Palhares](https://github.com/abnerrmp); [Daiane Fernande](https://github.com/daianerf)s; Maria Izabel Leite\] com o objetivo de apresentar as análises realizadas a partir do conjunto de dados PowderyMildew, disponibilizado pelo pacote Epifitter no R. A atividade integra o trabalho final da disciplina FIP 606 – Análise e Visualização de Dados em Fitopatologia, ministrada pelo professor \[Emerson Del Ponte\]((https://emersondelponte.netlify.app/)**.**
+Este site foi desenvolvido por [Abner Palhares](https://github.com/abnerrmp); [Daiane Fernandes](https://github.com/daianerf); [Maria Izabel Leite](https://github.com/izabelalmeidal) com o objetivo de apresentar as análises realizadas a partir do conjunto de dados PowderyMildew, disponibilizado pelo pacote Epifitter no R. A atividade integra o trabalho final da disciplina FIP 606 – Análise e Visualização de Dados em Fitopatologia, ministrada pelo professor [Emerson Del Ponte](https://emersondelponte.netlify.app/)**.**
 
-A análise teve como foco a severidade da doença oídio, causada por Leveillula taurica, em tomateiro cultivado sob diferentes sistemas de irrigação e níveis de umidade do solo, em um sistema de cultivo orgânico.
+A análise teve como foco a severidade da doença oídio, causada por *Leveillula taurica*, em tomateiro cultivado sob diferentes sistemas de irrigação e níveis de umidade do solo, em um sistema de cultivo orgânico.
 
 # Obtenção dos dados
 
@@ -81,11 +83,11 @@ Por meio da análise dos dados, objetivou-se avaliar a influência de diferentes
 A primeira etapa para a análise dos dados é a instalação e o carregamento dos pacotes e dados no ambiente R.
 
 ```{r}
-# 1. Instalar e carregar pacotes
-# Verificação e instalação automática de pacotes necessários
-#packages <- c("readxl", "dplyr", "ggplot2", "epifitter", "agricolae", "car", "gganimate", "animate", "DHARMa", "ggthemes", "skimr", "DataExplorer", "tidyverse", "gifski", "showtext", "sysfonts","png", "easystats", "performance", "emmeans", "multcomp")
-#new_packages <- packages[!(packages %in% installed.packages()[, "Package"])]
-#if(length(new_packages)) install.packages(new_packages)
+# Instalar e carregar pacotes
+#Verificação e instalação automática de pacotes necessários
+packages <- c("readxl", "dplyr", "ggplot2", "epifitter", "agricolae", "car", "gganimate", "animate", "DHARMa", "ggthemes", "skimr", "DataExplorer", "tidyverse", "gifski", "showtext", "sysfonts","png", "easystats", "performance", "emmeans", "multcomp")
+new_packages <- packages[!(packages %in% installed.packages()[, "Package"])]
+if(length(new_packages)) install.packages(new_packages)
 
 
 # Carregar os pacotes
@@ -152,22 +154,20 @@ names(dados)
 
 Para aprimorar a estética visual de gráficos e aplicações no R, foram adicionadas fontes do Google Fonts utilizando a função `font_add_google()` da biblioteca **`showtext`**. Cada chamada da função carrega uma fonte específica, associando-a a um nome de família que pode ser usado posteriormente em elementos gráficos, como títulos, eixos e textos.
 
-As fontes adicionadas foram: **Lato, Montserrat, Inter, Manrope, Nunito, Work Sans, Lexend, Raleway, Quicksand, Roboto e Poppins.\
+As fontes adicionadas foram: **Montserrat, Inter, Manrope, Nunito, Work Sans, Lexend, Raleway, Quicksand, Roboto e Poppins.\
 **Após a adição das fontes, a função `showtext_auto()` foi ativada. Essa função garante que as fontes personalizadas sejam corretamente renderizadas em gráficos gerados com o R, inclusive ao exportar para imagens.
 
 ```{r}
-#font_add_google(name = "lato", family = "lato")
-#font_add_google(name = "montserrat", family = "montserrat")
-#font_add_google(name = "inter", family = "inter")
-#font_add_google(name = "manrope", family = "manrope")
-#font_add_google(name = "nunito", family = "nunito")
-#font_add_google(name = "work sans", family = "work sans")
-#font_add_google(name = "lexend", family = "lexend")
-#font_add_google(name = "raleway", family = "raleway")
-#font_add_google(name = "quicksand", family = "quicksand")
-#font_add_google(name = "roboto", family = "roboto")
-#font_add_google(name = "poppins", family = "poppins")
-#showtext_auto()
+font_add_google(name = "inter", family = "inter")
+font_add_google(name = "manrope", family = "manrope")
+font_add_google(name = "nunito", family = "nunito")
+font_add_google(name = "work sans", family = "work sans")
+font_add_google(name = "lexend", family = "lexend")
+font_add_google(name = "raleway", family = "raleway")
+font_add_google(name = "quicksand", family = "quicksand")
+font_add_google(name = "roboto", family = "roboto")
+font_add_google(name = "poppins", family = "poppins")
+showtext_auto()
 ```
 
 #### Estabelecendo cores
@@ -206,12 +206,10 @@ cores_contorno <- c(
 
 ### Análise exploratória dos dados
 
-Na etapa inicial da análise exploratória, foi utilizada a função `plot_missing()` do pacote **`DataExplorer`**, que gera um gráfico de barras indicando a porcentagem de dados faltantes (valores NA) por variável no conjunto de dados. Essa visualização permite identificar rapidamente colunas com problemas de completude, facilitando decisões sobre limpeza ou imputação de dados. O gráfico gerado foi personalizado com o título "Dados Faltantes", e o tema visual foi ajustado com `theme_hc()` para melhor apresentação. Em seguida, a imagem foi salva com fundo branco por meio da função `ggsave()`.
+Na etapa inicial da análise exploratória, foi utilizada a função `plot_missing()` do pacote `DataExplorer`, que gera um gráfico de barras indicando a porcentagem de dados faltantes (valores NA) por variável no conjunto de dados. Essa visualização permite identificar rapidamente colunas com problemas de completude, facilitando decisões sobre limpeza ou imputação de dados. O gráfico gerado foi personalizado com o título "Dados Faltantes", e o tema visual foi ajustado com `theme_hc()` para melhor apresentação.
 
 ```{r}
-plot_missing(dados) + 
-  ggtitle("Dados Faltantes") +
-  theme_hc()
+plot_missing(dados)
 ```
 
 A função `summary()` é uma ferramenta prática para explorar rapidamente os dados. É usada para gerar um resumo estatístico básico de um data frame. Fornece medidas como mínimo, máximo, média, mediana e quartis para variáveis numéricas, e a frequência para variáveis categóricas.
@@ -368,7 +366,6 @@ ggplot(
 
 ```{r}
 # Gráfico para high moisture
-
 ggplot(
   dados3 %>% filter(moisture == "High moisture"),
   aes(x = time, y = sev_mean, color = irrigation_type, fill = irrigation_type)
@@ -443,9 +440,11 @@ gif_moderate <- ggplot(
   scale_fill_manual(values = cores_irrigation) +
   transition_reveal(along = time)
 
-#gif_anim_moderate <- animate(gif_moderate, fps = 10, width = 800, height = 500, renderer = gifski_renderer())
+#gif_anim_moderate <- animate(gif_moderate, fps = 10, width = 800, height = 500, renderer = #gifski_renderer())
 #anim_save("severidade_moderate_moisture.gif", gif_anim_moderate)
 ```
+
+![](severidade_moderate_moisture.gif)
 
 ##### Umidade alta
 
@@ -480,12 +479,14 @@ gif_high <- ggplot(
   scale_fill_manual(values = cores_irrigation) +
   transition_reveal(along = time)
 
-# Criar animação
-#gif_anim_high <- animate(gif_high, fps = 10, width = 800, height = 500, renderer = gifski_renderer())
+#Criar animação
+#gif_anim_high <- animate(gif_high, fps = 10, width = 800, height = 500, renderer = #gifski_renderer())
 
 # Salvar
 #anim_save("severidade_high_moisture.gif", gif_anim_high)
 ```
+
+![](severidade_high_moisture.gif)
 
 ###### Observações:
 
@@ -512,17 +513,7 @@ dados_filtrados <- dados %>%
   filter(irrigation_type %in% tipos_validos)
 ```
 
-## Análise estatística e teste de hipóteses
-
--   **Hipótese nula (H₀):** A severidade da doença é igual para todos os tratamentos estudados;
-
--   **Hipótese alternativa (Hₐ):** Pelo menos um dos tratamentos apresenta severidade média diferente da dos demais.
-
-### ANOVA
-
-Para a realização da ANOVA, foi considerado apenas o último tempo de avaliação da severidade da doença (aos 63 dias de avaliação), uma vez que o objetivo principal era identificar quais tratamentos apresentaram menor severidade e, portanto, foram mais eficazes no controle da doença. A análise foi conduzida para avaliar os efeitos do tipo de irrigação (*irrigation_type*), do nível de umidade do solo (*moisture*) e de sua interação (*irrigation_type × moisture*). O bloco experimental (*block*) foi incluído como fator aleatório, convertido com `as.factor(block)`.
-
-A análise do modelo de ANOVA foi realizada utilizando a função `aov`, a qual faz parte do pacote base do R. Os resultados da ANOVA foram obtidos com s`ummary(aov_dados63)`, permitindo a identificação de efeitos significativos entre os tratamentos.
+#### Boxplot de severidade final
 
 ```{r}
 dados_63 <- dados_filtrados |> 
@@ -531,8 +522,6 @@ dados_63 <- dados_filtrados |>
 aov_dados63 = aov(sev ~ irrigation_type*moisture + as.factor(block), data = dados_63)
 summary(aov_dados63)
 ```
-
-#### Boxplot de severidade final
 
 ```{r}
 
@@ -564,6 +553,18 @@ guides(
   fill = guide_legend(override.aes = list(shape = 21, size = 5))
 )
 ```
+
+## Análise estatística e teste de hipóteses
+
+-   **Hipótese nula (H₀):** A severidade da doença é igual para todos os tratamentos estudados;
+
+-   **Hipótese alternativa (Hₐ):** Pelo menos um dos tratamentos apresenta severidade média diferente da dos demais.
+
+### ANOVA
+
+Para a realização da ANOVA, foi considerado apenas o último tempo de avaliação da severidade da doença (aos 63 dias de avaliação), uma vez que o objetivo principal era identificar quais tratamentos apresentaram menor severidade e, portanto, foram mais eficazes no controle da doença. A análise foi conduzida para avaliar os efeitos do tipo de irrigação (*irrigation_type*), do nível de umidade do solo (*moisture*) e de sua interação (*irrigation_type × moisture*). O bloco experimental (*block*) foi incluído como fator aleatório, convertido com `as.factor(block)`.
+
+A análise do modelo de ANOVA foi realizada utilizando a função `aov`, a qual faz parte do pacote base do R. Os resultados da ANOVA foram obtidos com s`ummary(aov_dados63)`, permitindo a identificação de efeitos significativos entre os tratamentos.
 
 | Efeito | df | F value | Pr(\>F) | Significância |
 |---------------|---------------|---------------|---------------|---------------|
@@ -822,7 +823,7 @@ leveneTest(AACPD ~ tratamento, data = aacpd_resultado)
 
 ```
 
-### Boxplot
+### Boxplot (AACPD)
 
 ```{r}
 aacpd_resultado2 <- aacpd_resultado %>%
