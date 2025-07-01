@@ -70,11 +70,35 @@ Por meio da análise dos dados, objetivou-se avaliar a influência de diferentes
 
 # **Hipóteses testadas**
 
-**Hipótese nula (H₀):\
-**Não há diferença significativa na severidade da doença entre os diferentes tipos de irrigação e níveis de umidade do solo. A média da severidade é igual em todos os tratamentos avaliados.
+-   **Efeito do tipo de irrigação**
 
-**Hipótese alternativa (Hₐ):\
-**Pelo menos uma das combinações de tipo de irrigação e nível de umidade apresenta severidade significativamente diferente das demais, indicando efeito do tratamento sobre o desenvolvimento da doença.
+    -   Hipótese nula (H₀₁):
+
+        -   Não há diferença significativa na severidade da doença entre os diferentes tipos de irrigação;
+
+    -   Hipótese alternativa (H₁₁):
+
+        -   Pelo menos um tipo de irrigação resulta em severidade significativamente diferente dos demais.
+
+-   **Efeito do nível de umidade do solo**
+
+    -   Hipótese nula (H₀₂):
+
+        -   Não há diferença significativa na severidade da doença entre os níveis de umidade do solo;
+
+    -   Hipótese alternativa (H₁₂):
+
+        -   Pelo menos um nível de umidade resulta em severidade significativamente diferente dos demais.
+
+-   **Interação entre tipo de irrigação e umidade do solo**
+
+    -   Hipótese nula (H₀₃):
+
+        -   Não há interação entre tipo de irrigação e nível de umidade. O efeito de um fator é independente do outro;
+
+    -   Hipótese alternativa (H₁₃):
+
+        -   Existe interação entre os fatores, ou seja, o efeito de um tipo de irrigação depende do nível de umidade do solo.
 
 ## Análise da variável resposta (Severidade do oídio)
 
@@ -587,7 +611,7 @@ Para a realização da ANOVA, foi considerado apenas o último tempo de avaliaç
 A análise do modelo de ANOVA foi realizada utilizando a função `aov`, a qual faz parte do pacote base do R. Os resultados da ANOVA foram obtidos com s`ummary(aov_dados63)`, permitindo a identificação de efeitos significativos entre os tratamentos.
 
 | Efeito | df | F value | Pr(\>F) | Significância |
-|----|----|----|----|----|
+|---------------|---------------|---------------|---------------|---------------|
 | `irrigation_type` | 2 | 462.898 | 1.39e-10 | \*\*\* significativo ao nível de 0% |
 | `moisture` | 1 | 13.342 | 0.00444 | \*\* significativo ao nível de 0,1% |
 | `block` (como fator) | 2 | 0.221 | 0.80572 | NS |
@@ -733,7 +757,7 @@ print(letras)
 A tabela abaixo apresenta as médias ajustadas da severidade da doença para cada combinação de tipo de irrigação e umidade, incluindo erro padrão, intervalos de confiança, e o agrupamento por letras. O agrupamento foi feito com base na comparação múltipla utilizando o método de Sidak ajustado para Tukey (α = 0,05). Letras iguais indicam ausência de diferença estatística significativa.
 
 |  |  |  |  |  |  |  |  |
-|----|----|----|----|----|----|----|----|
+|---------|---------|---------|---------|---------|---------|---------|---------|
 | Tipo de Irrigação | Umidade | Média Ajustada | SE | GL | IC Inferior | IC Superior | Grupo |
 | Overhead | Alta | 0.124 | 0.00898 | 10 | 0.0944 | 0.153 | a |
 | Overhead | Moderada | 0.129 | 0.00898 | 10 | 0.1 | 0.159 | a |
