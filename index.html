@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="obtenção-dos-dados" class="level1">
 <h1>Obtenção dos dados</h1>
-<p>Os dados utilizados neste estudo foram obtidos a partir do conjunto <em>PowderyMildew</em>, disponível no pacote <code>Epifitter</code> do R (RStudio®). Este conjunto reúne informações experimentais sobre a progressão do oídio (<em>Leveillula taurica</em>) em tomateiros cultivados sob diferentes sistemas de irrigação e níveis de umidade do solo,em um sistema de produção orgânico.</p>
+<p>Os dados utilizados neste estudo foram obtidos a partir do conjunto <em>PowderyMildew</em>, disponível no pacote <code>Epifitter</code> do R (RStudio®). Este conjunto reúne informações experimentais sobre a progressão do oídio (<em>Leveillula taurica</em>) em tomateiros cultivados sob diferentes sistemas de irrigação e níveis de umidade do solo, em um sistema de produção orgânico.</p>
 <p>O pacote <code>Epifitter</code> foi desenvolvido para facilitar a análise epidemiológica de doenças em plantas, oferecendo um conjunto de funções para visualização, descrição, ajuste e comparação de curvas de progresso de doenças.</p>
 </section>
 <section id="estrutura-do-conjunto-de-dados" class="level1">
@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="importação-dos-dados" class="level3">
 <h3 class="anchored" data-anchor-id="importação-dos-dados">Importação dos dados</h3>
-<p>Como o data frame contendo os dados de severidade estão localizados em uma planilha do Excel, para realizar a importação dos dados necessitou-se utilizar a função <code>read_excel( )</code> do pacote <code>readxl</code>. O data frame foi atribuído ao objeto denominado dados.</p>
+<p>Como os dados de severidade estão localizados em uma planilha do Excel, para realizar a importação dos dados necessitou-se utilizar a função <code>read_excel( )</code> do pacote <code>readxl</code>. O data frame foi atribuído ao objeto denominado <em>dados</em>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados.xlsx"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -414,8 +414,8 @@ $ sev             &lt;dbl&gt; 0.011, 0.011, 0.011, 0.034, 0.040, 0.036, 0.114, 0
 <h2 class="anchored" data-anchor-id="estabelecendo-o-visual-do-trabalho">Estabelecendo o visual do trabalho</h2>
 <section id="estabelecendo-fontes" class="level4">
 <h4 class="anchored" data-anchor-id="estabelecendo-fontes">Estabelecendo fontes</h4>
-<p>Para aprimorar a estética visual de gráficos e aplicações no R, foram adicionadas fontes do Google Fonts utilizando a função <code>font_add_google()</code> da biblioteca <strong><code>showtext</code></strong>. Cada chamada da função carrega uma fonte específica, associando-a a um nome de família que pode ser usado posteriormente em elementos gráficos, como títulos, eixos e textos.</p>
-<p>As fontes adicionadas foram: <strong>Montserrat, Inter, Manrope, Nunito, Work Sans, Lexend, Raleway, Quicksand, Roboto e Poppins.<br>
+<p>Para aprimorar a estética visual de gráficos e aplicações no R, foram adicionadas fontes do Google Fonts utilizando a função <code>font_add_google()</code> da biblioteca <code>showtext</code>. Cada chamada da função carrega uma fonte específica, associando-a a um nome de família que pode ser usado posteriormente em elementos gráficos, como títulos, eixos e textos.</p>
+<p>As fontes adicionadas foram: <strong>Inter, Manrope, Nunito, Work Sans, Lexend, Raleway, Quicksand, Roboto e Poppins.<br>
 </strong>Após a adição das fontes, a função <code>showtext_auto()</code> foi ativada. Essa função garante que as fontes personalizadas sejam corretamente renderizadas em gráficos gerados com o R, inclusive ao exportar para imagens.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"inter"</span>, <span class="at">family =</span> <span class="st">"inter"</span>)</span>
@@ -831,6 +831,7 @@ $ sev             &lt;dbl&gt; 0.011, 0.011, 0.011, 0.034, 0.040, 0.036, 0.114, 0
 </section>
 <section id="boxplot-de-severidade-final" class="level4">
 <h4 class="anchored" data-anchor-id="boxplot-de-severidade-final">Boxplot de severidade final</h4>
+<p>Filtra o conjunto dados_filtrados para manter apenas as observações no tempo 63, considerado como tempo final de avaliação da severidade.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dados_63 <span class="ot">&lt;-</span> dados_filtrados <span class="sc">|&gt;</span> </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(time <span class="sc">==</span> <span class="dv">63</span>)</span>
@@ -848,6 +849,7 @@ Residuals                10 0.00242 0.00024
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<p>Após visualizar a severidade com todos os tempos de avaliação, selecionou-se apenas a severidade final para plotar em um boxplot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_63, <span class="fu">aes</span>(<span class="at">x =</span> irrigation_type, <span class="at">y =</span> sev, <span class="at">fill =</span> irrigation_type, <span class="at">color =</span> irrigation_type)) <span class="sc">+</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
@@ -884,6 +886,20 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </div>
+<ul>
+<li><p><strong>Alta umidade (High moisture)</strong></p>
+<ul>
+<li><p>O tratamento MS apresenta a maior severidade média e também uma distribuição mais compacta, indicando que os valores são consistentemente altos nesse tratamento, sem muita variação entre repetições;</p></li>
+<li><p>O tratamento MS above canopy apresenta nível intermediário de severidade, com uma faixa mais ampla de variação entre os dados, mas ainda abaixo do MS;</p></li>
+<li><p>O tratamento Overhead apresenta a menor severidade, com valores mais baixos e relativamente homogêneos, sugerindo uma eficiência maior no controle da doença sob alta umidade.</p></li>
+</ul></li>
+<li><p><strong>Umidade moderada (Moderate moisture)</strong></p>
+<ul>
+<li><p>A severidade permanece alta no tratamento MS, indicando que esse sistema de irrigação favorece o desenvolvimento da doença independentemente da umidade;</p></li>
+<li><p>O tratamento MS above canopy novamente ocupa uma posição intermediária;</p></li>
+<li><p>O tratamento Overhead continua sendo o mais eficaz, com a menor severidade registrada, inclusive com menor variabilidade.</p></li>
+</ul></li>
+</ul>
 </section>
 </section>
 </section>

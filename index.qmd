@@ -14,7 +14,7 @@ A análise teve como foco a severidade da doença oídio, causada por *Leveillul
 
 # Obtenção dos dados
 
-Os dados utilizados neste estudo foram obtidos a partir do conjunto *PowderyMildew*, disponível no pacote `Epifitter` do R (RStudio®). Este conjunto reúne informações experimentais sobre a progressão do oídio (*Leveillula taurica*) em tomateiros cultivados sob diferentes sistemas de irrigação e níveis de umidade do solo,em um sistema de produção orgânico.
+Os dados utilizados neste estudo foram obtidos a partir do conjunto *PowderyMildew*, disponível no pacote `Epifitter` do R (RStudio®). Este conjunto reúne informações experimentais sobre a progressão do oídio (*Leveillula taurica*) em tomateiros cultivados sob diferentes sistemas de irrigação e níveis de umidade do solo, em um sistema de produção orgânico.
 
 O pacote `Epifitter` foi desenvolvido para facilitar a análise epidemiológica de doenças em plantas, oferecendo um conjunto de funções para visualização, descrição, ajuste e comparação de curvas de progresso de doenças.
 
@@ -116,7 +116,7 @@ library(multcomp)
 
 ### Importação dos dados
 
-Como o data frame contendo os dados de severidade estão localizados em uma planilha do Excel, para realizar a importação dos dados necessitou-se utilizar a função `read_excel( )` do pacote `readxl`. O data frame foi atribuído ao objeto denominado dados.
+Como os dados de severidade estão localizados em uma planilha do Excel, para realizar a importação dos dados necessitou-se utilizar a função `read_excel( )` do pacote `readxl`. O data frame foi atribuído ao objeto denominado *dados*.
 
 ```{r}
 dados <- read_excel("dados.xlsx")
@@ -152,9 +152,9 @@ names(dados)
 
 #### Estabelecendo fontes
 
-Para aprimorar a estética visual de gráficos e aplicações no R, foram adicionadas fontes do Google Fonts utilizando a função `font_add_google()` da biblioteca **`showtext`**. Cada chamada da função carrega uma fonte específica, associando-a a um nome de família que pode ser usado posteriormente em elementos gráficos, como títulos, eixos e textos.
+Para aprimorar a estética visual de gráficos e aplicações no R, foram adicionadas fontes do Google Fonts utilizando a função `font_add_google()` da biblioteca `showtext`. Cada chamada da função carrega uma fonte específica, associando-a a um nome de família que pode ser usado posteriormente em elementos gráficos, como títulos, eixos e textos.
 
-As fontes adicionadas foram: **Montserrat, Inter, Manrope, Nunito, Work Sans, Lexend, Raleway, Quicksand, Roboto e Poppins.\
+As fontes adicionadas foram: **Inter, Manrope, Nunito, Work Sans, Lexend, Raleway, Quicksand, Roboto e Poppins.\
 **Após a adição das fontes, a função `showtext_auto()` foi ativada. Essa função garante que as fontes personalizadas sejam corretamente renderizadas em gráficos gerados com o R, inclusive ao exportar para imagens.
 
 ```{r}
@@ -515,6 +515,8 @@ dados_filtrados <- dados %>%
 
 #### Boxplot de severidade final
 
+Filtra o conjunto dados_filtrados para manter apenas as observações no tempo 63, considerado como tempo final de avaliação da severidade.
+
 ```{r}
 dados_63 <- dados_filtrados |> 
   dplyr::filter(time == 63)
@@ -522,6 +524,8 @@ dados_63 <- dados_filtrados |>
 aov_dados63 = aov(sev ~ irrigation_type*moisture + as.factor(block), data = dados_63)
 summary(aov_dados63)
 ```
+
+Após visualizar a severidade com todos os tempos de avaliação, selecionou-se apenas a severidade final para plotar em um boxplot.
 
 ```{r}
 
@@ -554,6 +558,22 @@ guides(
 )
 ```
 
+-   **Alta umidade (High moisture)**
+
+    -   O tratamento MS apresenta a maior severidade média e também uma distribuição mais compacta, indicando que os valores são consistentemente altos nesse tratamento, sem muita variação entre repetições;
+
+    -   O tratamento MS above canopy apresenta nível intermediário de severidade, com uma faixa mais ampla de variação entre os dados, mas ainda abaixo do MS;
+
+    -   O tratamento Overhead apresenta a menor severidade, com valores mais baixos e relativamente homogêneos, sugerindo uma eficiência maior no controle da doença sob alta umidade.
+
+-   **Umidade moderada (Moderate moisture)**
+
+    -   A severidade permanece alta no tratamento MS, indicando que esse sistema de irrigação favorece o desenvolvimento da doença independentemente da umidade;
+
+    -   O tratamento MS above canopy novamente ocupa uma posição intermediária;
+
+    -   O tratamento Overhead continua sendo o mais eficaz, com a menor severidade registrada, inclusive com menor variabilidade.
+
 ## Análise estatística e teste de hipóteses
 
 -   **Hipótese nula (H₀):** A severidade da doença é igual para todos os tratamentos estudados;
@@ -567,7 +587,7 @@ Para a realização da ANOVA, foi considerado apenas o último tempo de avaliaç
 A análise do modelo de ANOVA foi realizada utilizando a função `aov`, a qual faz parte do pacote base do R. Os resultados da ANOVA foram obtidos com s`ummary(aov_dados63)`, permitindo a identificação de efeitos significativos entre os tratamentos.
 
 | Efeito | df | F value | Pr(\>F) | Significância |
-|---------------|---------------|---------------|---------------|---------------|
+|----|----|----|----|----|
 | `irrigation_type` | 2 | 462.898 | 1.39e-10 | \*\*\* significativo ao nível de 0% |
 | `moisture` | 1 | 13.342 | 0.00444 | \*\* significativo ao nível de 0,1% |
 | `block` (como fator) | 2 | 0.221 | 0.80572 | NS |
@@ -713,7 +733,7 @@ print(letras)
 A tabela abaixo apresenta as médias ajustadas da severidade da doença para cada combinação de tipo de irrigação e umidade, incluindo erro padrão, intervalos de confiança, e o agrupamento por letras. O agrupamento foi feito com base na comparação múltipla utilizando o método de Sidak ajustado para Tukey (α = 0,05). Letras iguais indicam ausência de diferença estatística significativa.
 
 |  |  |  |  |  |  |  |  |
-|---------|---------|---------|---------|---------|---------|---------|---------|
+|----|----|----|----|----|----|----|----|
 | Tipo de Irrigação | Umidade | Média Ajustada | SE | GL | IC Inferior | IC Superior | Grupo |
 | Overhead | Alta | 0.124 | 0.00898 | 10 | 0.0944 | 0.153 | a |
 | Overhead | Moderada | 0.129 | 0.00898 | 10 | 0.1 | 0.159 | a |
