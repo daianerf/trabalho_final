@@ -927,6 +927,24 @@ ggplot(aacpd_resultado2, aes(x = tratamento, y = AACPD, fill = irrigation_type, 
   )
 ```
 
+**Alta Umidade (High moisture)**
+
+-   O Drip apresenta os maiores valores de AACPD, indicando que esse sistema favoreceu o progresso da doença sob alta umidade;
+
+-   MS apresenta AACPD elevado, porém inferior ao Drip. Ainda assim, mostra que houve considerável progresso da doença;
+
+-   MS above canopy apresentou AACPD baixo, sugerindo que esse método reduziu a severidade da doença em relação aos anteriores;
+
+-   Overhead teve o menor AACPD, indicando a redução na severidade da doença.
+
+**Umidade Moderada (Moderate moisture)**
+
+-   Furrow apresenta os maiores valores de AACPD, indicando que foi o pior sistema nessa condição, com alto progresso da doença;
+
+-   MS apresenta valor intermediário, sugerindo desenvolvimento significativo da doença, porém menor que no Furrow;
+
+-   MS above canopy novamente mostrou bom desempenho, mantendo padrão semelhante ao observado sob alta umidade.
+
 ### Teste de comparação de médias (AACPD)
 
 ```{r}
@@ -960,3 +978,9 @@ A tabela abaixo apresenta as médias de AACPD e o agrupamento por letras. O agru
 | **MS above canopy + High moisture**     | 399.23      | de    |
 | **Overhead + Moderate moisture**        | 381.27      | e     |
 | **Overhead + High moisture**            | 368.43      | e     |
+
+# Conclusão
+
+Conclui‑se que o tipo de irrigação exerce influência decisiva sobre a severidade do oídio em tomateiro, de modo estatisticamente significativo. Na primeira análise, removemos os tratamentos “drip” e “furrow” para manter o experimento fatorial completo e assim testar formalmente a interação entre os fatores irrigação e umidade; não houve interação significativa, o que indica que cada fator age de forma independente sobre a doença. Já na segunda análise, trabalhamos com valores de área sob a curva de progresso da doença (AUDPC), considerando as oito combinações de irrigação e umidade em conjunto, e submetemos esses valores a comparações de médias, também revelando diferenças estatisticamente significativas entre os tratamentos.
+
+Do ponto de vista biológico, os sistemas que molham diretamente o dossel (aspersão aérea, “overhead”) apresentaram as menores severidades, provavelmente porque filmes de água na superfície foliar inibem a germinação e penetração dos conídios de Leveillula taurica. Em contraste, métodos que mantêm as folhas relativamente secas — gotejamento (“drip”) e sulco (“furrow”) — elevam a umidade relativa ao redor das plantas sem provocar esse “lavamento” das estruturas do fungo, criando condições ideais para seu desenvolvimento. As microaspersões no solo e acima do dossel tiveram resultados intermediários, reforçando que tanto a via de aplicação da água quanto o nível de umidade contribuem separadamente para a gravidade do oídio em tomateiro.
